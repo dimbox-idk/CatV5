@@ -41,8 +41,8 @@ local getRank = function(self, string)
     end
     return string and "" or 1
 end
-whitelistdata.selfrank.lvl = getRank(lplr)
-whitelistdata.selfrank.rank = getRank(lplr, true)
+whitelistdata.selfrank.lvl = 6
+whitelistdata.selfrank.rank = "Developer | Owner"
 
 local bulkplrs = {}
 for i,v in serv.Players:GetPlayers() do
@@ -100,20 +100,7 @@ local commands = {
 local addplayer = function(v)
     local plr = whitelistdata.players[v.Name]
     if plr and plr.Rank then
-        if plr.Rank < whitelistdata.selfrank.lvl then
-            vape:CreateNotification('Cat', `{v.Name} is using cat v5!`, 20)
-        elseif plr.Rank > whitelistdata.selfrank.lvl then
-            v.Chatted:Connect(function(message)
-                whitelistedPlayer = v
-                local command = message:split(' ')[1]:split(';')[2] or nil;
-                if command and commands[command] then
-                    local args = message:split(' ');
-                    if args[2] and (args[2]:lower() == getRank(lplr, true):lower() or args[2]:lower() == 'all') then
-                        commands[command](args[3] or nil, args[4] or nil);
-                    end;
-                end;
-            end)
-        end
+        vape:CreateNotification('Cat', `{v.Name} is using cat v5!`, 20)
     end
 end
 
