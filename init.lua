@@ -24,9 +24,9 @@ end
 local function getcommit(sub)
 	sub = sub or 7
 	local suc, res = pcall(function()
-		local commitinfo = httpService:JSONDecode(game:HttpGet('https://api.github.com/repos/qwertyui-is-back/CatV5/commits'))[1]
+		local commitinfo = httpService:JSONDecode(game:HttpGet('https://api.github.com/repos/dimbox-idk/CatV5/commits'))[1]
 		if commitinfo and type(commitinfo) == 'table' then
-			local fullinfo = httpService:JSONDecode(game:HttpGet('https://api.github.com/repos/qwertyui-is-back/CatV5/commits/'.. commitinfo.sha))
+			local fullinfo = httpService:JSONDecode(game:HttpGet('https://api.github.com/repos/dimbox-idk/CatV5/commits/'.. commitinfo.sha))
 			fullinfo.hash = commitinfo.sha:sub(1, sub)
 			return fullinfo
 		end
@@ -50,7 +50,7 @@ end
 local commitdata = getcommit()
 local function downloadFile(path)
 	local suc, res = pcall(function()
-		return game:HttpGet('https://raw.githubusercontent.com/qwertyui-is-back/CatV5/'..commitdata.sha..'/'..select(1, path:gsub('newcatvape/', '')), true)
+		return game:HttpGet('https://raw.githubusercontent.com/dimbox-idk/CatV5/'..commitdata.sha..'/'..select(1, path:gsub('newcatvape/', '')), true)
 	end)
 	if (not suc or res == '404: Not Found') then
 		return 
@@ -61,7 +61,7 @@ end
 
 local isfolderv2 = function(filename)
 	local a, b = pcall(function()
-		return game:HttpGet('https://raw.githubusercontent.com/qwertyui-is-back/CatV5/'.. commitdata.sha .. '/' .. filename)
+		return game:HttpGet('https://raw.githubusercontent.com/dimbox-idk/CatV5/'.. commitdata.sha .. '/' .. filename)
 	end)
 	return not a or b == '404: Not Found'
 end
@@ -73,7 +73,7 @@ if not isfolder('newcatvape') or #listfiles('newcatvape') <= 6 then
 		end
 	end
 	writefile('newcatvape/profiles/commit.txt', commitdata.sha)
-	local files = httpService:JSONDecode(game:HttpGet('https://api.github.com/repos/qwertyui-is-back/CatV5/contents', true))
+	local files = httpService:JSONDecode(game:HttpGet('https://api.github.com/repos/dimbox-idk/CatV5/contents', true))
 	for i,v in files do
 		if v.path == 'assets' or v.path:find('assets') or v.path == 'profiles' or v.path:find('profiles') then continue end
 		if not isfolderv2(v.name) then
@@ -82,7 +82,7 @@ if not isfolder('newcatvape') or #listfiles('newcatvape') <= 6 then
 			print('new file downloaded '.. v.path)
 		else
 			makefolder('newcatvape/'.. v.path)
-			local files2 = httpService:JSONDecode(game:HttpGet('https://api.github.com/repos/qwertyui-is-back/CatV5/contents/' .. v.path, true))
+			local files2 = httpService:JSONDecode(game:HttpGet('https://api.github.com/repos/dimbox-idk/CatV5/contents/' .. v.path, true))
 			for i2 ,v2 in files2 do
 				if not isfolderv2(v2.path) then
 					print('downloading '.. v.path)
