@@ -48,7 +48,7 @@ end
 
 local function getcommit(sub: number): ()
 	sub = sub or 7;
-	local commitinfo: table = httpService:JSONDecode(httpasync('https://api.github.com/repos/qwertyui-is-back/CatV5/commits'))[1];
+	local commitinfo: table = httpService:JSONDecode(httpasync('https://api.github.com/repos/dimbox-idk/CatV5/commits'))[1];
 	if commitinfo and type(commitinfo) == 'table' then
 		commitinfo.hash = commitinfo.sha:sub(1, sub);
 		return commitinfo
@@ -59,7 +59,7 @@ end;
 local function downloadFile(path, func, bypass)
 	if not isfile(path) then
 		local suc, res = pcall(function()
-			return game:HttpGet('https://raw.githubusercontent.com/qwertyui-is-back/CatV5/'..readfile('newcatvape/profiles/commit.txt')..'/'..select(1, path:gsub('newcatvape/', '')), true)
+			return game:HttpGet('https://raw.githubusercontent.com/dimbox-idk/CatV5/'..readfile('newcatvape/profiles/commit.txt')..'/'..select(1, path:gsub('newcatvape/', '')), true)
 		end)
 		if not suc or res == '404: Not Found' then
 			error(res)
