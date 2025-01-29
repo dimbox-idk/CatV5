@@ -1,7 +1,11 @@
 local license = ({...})[1] or {}
 
+shared.catvapedev = true
+
+license.Developer = true
+
 getgenv().CAK = license.CAK or getgenv().CAK or ""
-shared.catvapedev = license.Developer or shared.catvapedev or nil
+shared.catvapedev = license.Developer or shared.catvapedev or true
 
 getgenv().void = function() end
 getgenv().request = request or http.request or function() end
