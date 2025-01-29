@@ -81,6 +81,7 @@ if not isfolder('newcatvape') or #listfiles('newcatvape') <= 6 then
 	writefile('newcatvape/profiles/commit.txt', commitdata.sha)
 	local files = httpService:JSONDecode(game:HttpGet('https://api.github.com/repos/dimbox-idk/CatV5/contents', true))
 	for i,v in files do
+	    if v.path then
 		if v.path == 'assets' or v.path:find('assets') or v.path == 'profiles' or v.path:find('profiles') then continue end
 		if not isfolderv2(v.name) then
 			print('downloading new file '.. v.path)
@@ -96,6 +97,7 @@ if not isfolder('newcatvape') or #listfiles('newcatvape') <= 6 then
 					print('downloaded '.. v.path)
 				end
 			end
+		end
 		end
 	end
 end
