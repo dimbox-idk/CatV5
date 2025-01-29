@@ -4,6 +4,8 @@ shared.catvapedev = true
 
 license.Developer = true
 
+shared.VapeDeveloper = true
+
 getgenv().CAK = license.CAK or getgenv().CAK or ""
 shared.catvapedev = license.Developer or shared.catvapedev or true
 
